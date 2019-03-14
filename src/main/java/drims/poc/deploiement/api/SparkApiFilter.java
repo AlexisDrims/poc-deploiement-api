@@ -8,6 +8,8 @@ import static spark.Spark.options;
 import static spark.Spark.post;
 import static spark.Spark.put;
 
+import org.sql2o.Sql2o;
+
 import drims.poc.deploiement.api.controller.IRestCrudController;
 import drims.poc.deploiement.api.controller.UserController;
 import spark.servlet.SparkApplication;
@@ -16,9 +18,16 @@ public class SparkApiFilter implements SparkApplication {
 
 	@Override
 	public void init() {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		Sql2o sql2o = new Sql2o("jdbc:mysql://172.17.0.1:3306/api_db", "root", "needs-a-new-password-here");
+		
 		get("/", (request, response) -> "It works");
 		get("/hello/:name", (request, response) -> "Hello " + request.params(":name"));
-		prepareCrudController("users", new UserController());
+		prepareCrudController("users", new UserController(sql2o));
 	}
 	
 	protected void prepareCrudController(String path, IRestCrudController controller) {
