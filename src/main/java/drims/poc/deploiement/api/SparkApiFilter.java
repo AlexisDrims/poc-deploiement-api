@@ -23,7 +23,7 @@ public class SparkApiFilter implements SparkApplication {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		Sql2o sql2o = new Sql2o("jdbc:mysql://172.17.0.1:3306/api_db", "root", "my-secret-pw");
+		Sql2o sql2o = new Sql2o("jdbc:mysql://172.17.0.1:15001/api_db", "root", "my-secret-pw");
 		
 		get("/", (request, response) -> "It works");
 		get("/version", (request, response) -> "?");
