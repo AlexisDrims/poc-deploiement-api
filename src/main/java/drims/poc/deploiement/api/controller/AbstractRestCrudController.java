@@ -15,6 +15,7 @@ public abstract class AbstractRestCrudController<T> extends AbstractRestControll
 		this.clazz = clazz;
 	}
 
+	@SuppressWarnings("unchecked")
 	public Object create(Request request, Response response) {
 		final T object = (T) JsonTools.fromJson(request.body(), clazz);
 		final T newObject = service.insert(object);
@@ -27,6 +28,7 @@ public abstract class AbstractRestCrudController<T> extends AbstractRestControll
 		return response(request, response, 200, object);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public Object updateById(Request request, Response response) {
 		final Long id = Long.valueOf(request.params(":id"));
 		final T object = (T) JsonTools.fromJson(request.body(), clazz);

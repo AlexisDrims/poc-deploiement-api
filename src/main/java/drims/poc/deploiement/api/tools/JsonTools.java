@@ -7,6 +7,7 @@ public class JsonTools {
 
 	private static Gson gson = new GsonBuilder().create();
 
+	@SuppressWarnings("unchecked")
 	public static Object fromJson(String json, Class typeOfT) {
 		return gson.fromJson(json, typeOfT);
 	}

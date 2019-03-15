@@ -5,7 +5,7 @@ import org.sql2o.Sql2o;
 import drims.poc.deploiement.api.model.User;
 import drims.poc.deploiement.api.service.UserCrudService;
 
-public class UserController extends AbstractRestCrudController {
+public class UserController extends AbstractRestCrudController<User> {
 
 	public UserController(Sql2o sql2o) {
 		super(new UserCrudService(sql2o), User.class);
